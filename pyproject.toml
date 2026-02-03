@@ -1,0 +1,7 @@
+[project]
+name = "transcription-service"
+version = "0.1.0"
+description = "Python transcription & translation service"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = []
