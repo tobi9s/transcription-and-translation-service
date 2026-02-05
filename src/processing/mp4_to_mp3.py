@@ -1,9 +1,8 @@
 from moviepy import VideoFileClip
-from pydub import AudioSegment
 from utils.get_root_path import get_root_path
 import os
 
-def _mp4_to_mp3(input_mp4_name: str):
+def mp4_to_mp3(input_mp4_name: str):
     """
     Convert a .mp4 file into a .mp3 file. 
     """
