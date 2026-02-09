@@ -9,4 +9,5 @@ dependencies = [
     "openai>=2.16.0",
     "pydub>=0.25.1",
     "python-dotenv>=1.2.1",
+    "setuptools>=82.0.0"
 ]
