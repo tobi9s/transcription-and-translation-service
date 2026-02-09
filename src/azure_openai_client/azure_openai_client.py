@@ -47,7 +47,7 @@ class AzureOpenAIClient:
         except Exception as e:
             print(f"Something went wrong: {str(e)}")
         
-    def translation(self, file_name: str):
+    def translate(self, file_name: str):
         """
         "Translates a .mp3 file.
         """

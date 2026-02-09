@@ -8,6 +8,6 @@ def create_azure_openai_client():
     return AzureOpenAIClient(
         api_key=os.environ.get("AZURE_OPENAI_KEY"),
         endpoint=os.environ.get("AZURE_OPENAI_ENDPOINT"),
-        version=os.environ.get("AZURE_OPENAI_WHISPER_DEPLOYMENT"),
-        model=os.environ.get("AZURE_OPENAI_VERSION")
+        version=os.environ.get("AZURE_OPENAI_VERSION"),
+        model=os.environ.get("AZURE_OPENAI_WHISPER_DEPLOYMENT")
     )
