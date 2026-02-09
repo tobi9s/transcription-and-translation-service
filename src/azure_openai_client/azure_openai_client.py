@@ -1,5 +1,5 @@
 from openai import AzureOpenAI
-from utils.get_root_path import get_root_path
+from src.utils.get_root_path import get_root_path
 import os
 
 class AzureOpenAIClient:

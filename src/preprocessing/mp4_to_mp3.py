@@ -1,5 +1,5 @@
 from moviepy import VideoFileClip
-from utils.get_root_path import get_root_path
+from src.utils.get_root_path import get_root_path
 import os
 
 def mp4_to_mp3(input_mp4_name: str):
