@@ -14,21 +14,36 @@ class AzureOpenAIClient:
             api_version=self._version
         )
 
+    def _save_files(self, file_name: str, suffix: str, result):
+        """
+        Saves files into a certain directory.
+
+        Internal use only.
+        """
+        root = get_root_path()
+        dir = f"{root}/data/output/"
+        os.makedirs(dir, exist_ok=True)
+        file_path = os.path.join(dir, f"{file_name}_{suffix}.srt")
+        with open(file_path, "w", encoding="utf-8") as f:
+            f.write(result)
+
     def transcribe(self, file_name: str):
         """
         "Transcribes a .mp3 file.
         """
         root = get_root_path()
-        input_file = f"{root}/data/output/{file_name}.mp3"
+        input_file = f"{root}/data/chunks/{file_name}.mp3"
         if os.path.exists(input_file) is False:
             raise FileNotFoundError(f"File not found: {input_file}")
         try:
             with open(input_file, "rb") as audio_file:
-                return self._client.audio.transcriptions.create(
+                result = self._client.audio.transcriptions.create(
                     model=self._model,
                     file=audio_file,
                     response_format="srt"
                 )
+                self._save_files(file_name, "transcription", result)
+                return result
         except Exception as e:
             print(f"Something went wrong: {str(e)}")
         
@@ -37,15 +52,17 @@ class AzureOpenAIClient:
         "Translates a .mp3 file.
         """
         root = get_root_path()
-        input_file = f"{root}/data/output/{file_name}.mp3"
+        input_file = f"{root}/data/chunks/{file_name}.mp3"
         if os.path.exists(input_file) is False:
             raise FileNotFoundError(f"File not found: {input_file}")
         try:
             with open(input_file, "rb") as audio_file:
-                return self._client.audio.translations.create(
+                result = self._client.audio.translations.create(
                     model=self._model,
                     file=audio_file,
                     response_format="srt"
                 )
+                self._save_files(file_name, "translation", result)
+                return result
         except Exception as e:
             print(f"Something went wrong: {str(e)}")
