@@ -1,9 +1,13 @@
 import os
-from openai import AzureOpenAI
+from src.azure_openai_client.azure_openai_client import AzureOpenAIClient
 
-def azure_openai_client():
-    return AzureOpenAI(
-        endpoint=os.environ.get("AZURE_OPENAI_ENDPOINT"),
+def create_azure_openai_client():
+    """
+    Initializes an instance of AzureOpenAIClient.
+    """
+    return AzureOpenAIClient(
         api_key=os.environ.get("AZURE_OPENAI_KEY"),
-        api_version="2024-06-01"
+        endpoint=os.environ.get("AZURE_OPENAI_ENDPOINT"),
+        version=os.environ.get("AZURE_OPENAI_WHISPER_DEPLOYMENT"),
+        model=os.environ.get("AZURE_OPENAI_VERSION")
     )
