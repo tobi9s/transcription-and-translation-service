@@ -14,4 +14,4 @@ def chunk_mp3(input_mp3: str):
     chunk_ms = 10 * 60 * 1000
     for i in range(0, len(mp3), chunk_ms):
         part = mp3[i:i+chunk_ms]
-        part.export(f"{root}/data/output_part_{i//chunk_ms + 1}.mp3", format="mp3")
+        part.export(f"{root}/data/{input_mp3}_chunk_{i//chunk_ms + 1}.mp3", format="mp3")
