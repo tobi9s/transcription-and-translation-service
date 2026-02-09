@@ -512,7 +512,7 @@ wheels = [
 ]
 
 [[package]]
-name = "transcription-service"
+name = "transcription-and-translation-service"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [

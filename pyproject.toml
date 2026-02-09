@@ -1,5 +1,5 @@
 [project]
-name = "transcription-service"
+name = "transcription-and-translation-service"
 version = "0.1.0"
 description = "Python transcription & translation service"
 readme = "README.md"
