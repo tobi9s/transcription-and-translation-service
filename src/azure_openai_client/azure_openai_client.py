@@ -1,4 +1,6 @@
 from openai import AzureOpenAI
+from utils.get_root_path import get_root_path
+import os
 
 class AzureOpenAIClient:
     def __init__(self, api_key: str, endpoint: str, version: str, model: str):
@@ -12,24 +14,38 @@ class AzureOpenAIClient:
             api_version=self._version
         )
 
-    def transcribe(self, file):
+    def transcribe(self, file_name: str):
         """
         "Transcribes a .mp3 file.
         """
-        with open(file, "rb") as audio_file:
-            return self._client.audio.transcriptions.create(
-                model=self._model,
-                file=audio_file,
-                response_format="srt"
-            )
+        root = get_root_path()
+        input_file = f"{root}/data/output/{file_name}.mp3"
+        if os.path.exists(input_file) is False:
+            raise FileNotFoundError(f"File not found: {input_file}")
+        try:
+            with open(input_file, "rb") as audio_file:
+                return self._client.audio.transcriptions.create(
+                    model=self._model,
+                    file=audio_file,
+                    response_format="srt"
+                )
+        except Exception as e:
+            print(f"Something went wrong: {str(e)}")
         
-    def translation(self, file):
+    def translation(self, file_name: str):
         """
         "Translates a .mp3 file.
         """
-        with open(file, "rb") as audio_file:
-            return self._client.audio.translations.create(
-                model=self._model,
-                file=audio_file,
-                response_format="srt"
-            )
+        root = get_root_path()
+        input_file = f"{root}/data/output/{file_name}.mp3"
+        if os.path.exists(input_file) is False:
+            raise FileNotFoundError(f"File not found: {input_file}")
+        try:
+            with open(input_file, "rb") as audio_file:
+                return self._client.audio.translations.create(
+                    model=self._model,
+                    file=audio_file,
+                    response_format="srt"
+                )
+        except Exception as e:
+            print(f"Something went wrong: {str(e)}")
