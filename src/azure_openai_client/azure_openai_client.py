@@ -21,7 +21,7 @@ class AzureOpenAIClient:
         Internal use only.
         """
         root = get_root_path()
-        dir = f"{root}/data/output/"
+        dir = f"{root}/data/{suffix}/"
         os.makedirs(dir, exist_ok=True)
         file_path = os.path.join(dir, f"{file_name}_{suffix}.srt")
         with open(file_path, "w", encoding="utf-8") as f:
