@@ -3,17 +3,18 @@ from src.preprocessing.chunk_mp3 import chunk_mp3
 from src.preprocessing.mp4_to_mp3 import mp4_to_mp3
 from src.srt_processing.srt_processing import srt_merge
 from src.utils.get_root_path import get_root_path
+from src.subtitles.subtitles import mp4_with_subtitles
 import os
 
 def main():
     root = get_root_path()
     client = create_azure_openai_client()
     print("Enter the .mp4 file name from data/input:")
-    file = input()
-    mp4_to_mp3(file)
-    print(f"Converted {file}.mp4 to .mp3!")
-    chunk_mp3(file)
-    print(f"Chunked {file}.mp3!")
+    input_file = input()
+    mp4_to_mp3(input_file)
+    print(f"Converted {input_file}.mp4 to .mp3!")
+    chunk_mp3(input_file)
+    print(f"Chunked {input_file}.mp3!")
     chunk_path = f"{root}/data/chunks"
     for file in os.listdir(chunk_path):
         if file.endswith(".mp3"):
@@ -33,7 +34,7 @@ def main():
         for fname in os.listdir(transcription_dir)
         if fname.endswith(".srt")
     ]
-    srt_merge(transcription_files, audio_files, f"{root}/data/output/merged_transcription.srt")
+    srt_merge(transcription_files, audio_files, f"{root}/data/merged/transcription.srt")
     print("Merged all transcription snippets!")
     translation_dir = f"{root}/data/translation"
     translation_files = [
@@ -41,8 +42,9 @@ def main():
         for fname in os.listdir(translation_dir)
         if fname.endswith(".srt")
     ]
-    srt_merge(translation_files, audio_files, f"{root}/data/output/merged_translation.srt")
+    srt_merge(translation_files, audio_files, f"{root}/data/merged/translation.srt")
     print("Merged all translation snippets!")
+    print("Created subtitles!")
     print("Finished!")
 
 if __name__ == "__main__":
