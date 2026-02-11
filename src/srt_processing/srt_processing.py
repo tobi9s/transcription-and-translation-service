@@ -1,6 +1,9 @@
 import re
 from datetime import timedelta
 from pydub import AudioSegment
+from src.utils.get_root_path import get_root_path
+import pysrt
+import os
 
 def _parse_srt_time(t):
     """
@@ -69,3 +72,17 @@ def srt_merge(srt_files, audio_files, output_path):
     merged = "\n\n".join(merged_blocks)
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(merged)
+
+def srt_extract(srt_file):
+    """
+    Extracts the text of a .srt file.
+    """
+    root = get_root_path()
+    file = f"{root}/data/merged/{srt_file}.srt"
+    if os.path.exists(file) is False:
+        raise FileNotFoundError(f"File not found: {file}")
+    try:
+        srt = pysrt.open(file)
+        return [s.text for s in srt]
+    except Exception as e:
+        print(f"Couldnt extract text from {file}: {str(e)}")

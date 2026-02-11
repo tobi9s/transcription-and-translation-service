@@ -1,9 +1,8 @@
 from src.utils.client_factory import create_azure_openai_client
 from src.preprocessing.chunk_mp3 import chunk_mp3
 from src.preprocessing.mp4_to_mp3 import mp4_to_mp3
-from src.srt_processing.srt_processing import srt_merge
+from src.srt_processing.srt_processing import srt_merge, srt_extract
 from src.utils.get_root_path import get_root_path
-from src.subtitles.subtitles import mp4_with_subtitles
 import os
 
 def main():
