@@ -19,4 +19,5 @@ dependencies = [
     "protobuf==6.33.5",
     "huggingface-hub==1.4.1",
     "httpx==0.28.1",
+    "pysrt==1.1.2",
 ]
