@@ -3,6 +3,8 @@ from src.preprocessing.chunk_mp3 import chunk_mp3
 from src.preprocessing.mp4_to_mp3 import mp4_to_mp3
 from src.srt_processing.srt_processing import srt_merge, srt_extract
 from src.utils.get_root_path import get_root_path
+from src.utils.get_model import get_model
+from src.translation.translation import translate
 import os
 
 def main():
