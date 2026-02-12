@@ -1,6 +1,6 @@
 import os
 from src.azure_openai_client.azure_openai_client import AzureOpenAIClient
-from translation_client.translation_client import TranslationClient
+from src.translation_client.translation_client import TranslationClient
 
 def create_azure_openai_client():
     """

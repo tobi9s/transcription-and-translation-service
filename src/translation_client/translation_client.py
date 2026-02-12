@@ -14,6 +14,8 @@ class TranslationClient:
         )
         if not os.path.exists(self._local_dir):
             self._get_model()
+        self._tokenizer = AutoTokenizer.from_pretrained(self._local_dir)
+        self._model_instance = AutoModelForSeq2SeqLM.from_pretrained(self._local_dir)
 
     def _sanitize_model_name(self, model_name):
         """
@@ -40,9 +42,7 @@ class TranslationClient:
         """
         Translates a text using the downloaded model.
         """
-        tokenizer = AutoTokenizer.from_pretrained(self._local_dir)
-        model = AutoModelForSeq2SeqLM.from_pretrained(self._local_dir)
-        inputs = tokenizer(text, return_tensors="pt", padding=True, truncation=True)
-        translated = model.generate(**inputs)
-        translated_text = tokenizer.batch_decode(translated, skip_special_tokens=True)
+        inputs = self._tokenizer(text, return_tensors="pt", padding=True, truncation=True)
+        translated = self._model_instance.generate(**inputs)
+        translated_text = self._tokenizer.batch_decode(translated, skip_special_tokens=True)
         return translated_text[0]
