@@ -11,10 +11,9 @@ def main():
     translation_client = create_translation_client()
     print("Enter the .mp4 file name from data/input:")
     input_file = input()
+    print(f"Proceeding with {input_file}.mp4")
     mp4_to_mp3(input_file)
-    print(f"Converted {input_file}.mp4 to .mp3!")
     chunk_mp3(input_file)
-    print(f"Chunked {input_file}.mp3!")
     chunk_path = f"{root}/data/chunks"
     for file in os.listdir(chunk_path):
         if file.endswith(".mp3"):
@@ -35,7 +34,6 @@ def main():
         if fname.endswith(".srt")
     ]
     srt_merge(transcription_files, audio_files, f"{root}/data/merged/transcription.srt")
-    print("Merged all transcription snippets!")
     translation_dir = f"{root}/data/translation"
     translation_files = [
         os.path.join(translation_dir, fname)
@@ -43,8 +41,6 @@ def main():
         if fname.endswith(".srt")
     ]
     srt_merge(translation_files, audio_files, f"{root}/data/merged/translation.srt")
-    print("Merged all translation snippets!")
-    print("Created subtitles!")
     texts = srt_extract("translation")
     translated_texts = []
     for text in texts:

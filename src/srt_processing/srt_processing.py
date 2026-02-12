@@ -86,7 +86,7 @@ def srt_extract(srt_file):
         srt = pysrt.open(file)
         return [s.text for s in srt]
     except Exception as e:
-        print(f"Couldnt extract text from {file}: {str(e)}")
+        raise RuntimeError(f"Could not extract text from {file}: {str(e)}")
 
 def srt_replace_text(srt_file, new_text: List[str]):
     """
@@ -105,4 +105,4 @@ def srt_replace_text(srt_file, new_text: List[str]):
             subtitle.text = new_text[i]
         srt.save(new_file, encoding="utf-8")
     except Exception as e:
-        print(f"Something went wrong: {str(e)}")
+        raise RuntimeError(f"Something went wrong: {str(e)}")
