@@ -1,7 +1,7 @@
 from src.utils.client_factory import create_azure_openai_client, create_translation_client
 from src.preprocessing.chunk_mp3 import chunk_mp3
 from src.preprocessing.mp4_to_mp3 import mp4_to_mp3
-from src.srt_processing.srt_processing import srt_merge, srt_extract
+from src.srt_processing.srt_processing import srt_merge, srt_extract, srt_replace_text
 from src.utils.get_root_path import get_root_path
 import os
 
@@ -45,12 +45,12 @@ def main():
     srt_merge(translation_files, audio_files, f"{root}/data/merged/translation.srt")
     print("Merged all translation snippets!")
     print("Created subtitles!")
-    print("Finished!")
     texts = srt_extract("translation")
     translated_texts = []
     for text in texts:
         translated_texts.append(translation_client.translate(text))
-    print(translated_texts)
+    srt_replace_text("translation", translated_texts)
+    print("Finished!")
 
 if __name__ == "__main__":
     main()

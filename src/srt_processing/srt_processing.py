@@ -4,6 +4,7 @@ from pydub import AudioSegment
 from src.utils.get_root_path import get_root_path
 import pysrt
 import os
+from typing import List
 
 def _parse_srt_time(t):
     """
@@ -86,3 +87,22 @@ def srt_extract(srt_file):
         return [s.text for s in srt]
     except Exception as e:
         print(f"Couldnt extract text from {file}: {str(e)}")
+
+def srt_replace_text(srt_file, new_text: List[str]):
+    """
+    Replaces the existing text of a .srt file with different text.
+    """
+    root = get_root_path()
+    file = f"{root}/data/merged/{srt_file}.srt"
+    new_file = f"{root}/data/results/{srt_file}.srt"
+    if os.path.exists(file) is False:
+        raise FileNotFoundError(f"File not found: {file}")
+    try:
+        srt = pysrt.open(file)
+        if len(new_text) != len(srt):
+            raise ValueError("Length of new_text does not match number of subtitles in the SRT file.")
+        for i, subtitle in enumerate(srt):
+            subtitle.text = new_text[i]
+        srt.save(new_file, encoding="utf-8")
+    except Exception as e:
+        print(f"Something went wrong: {str(e)}")
