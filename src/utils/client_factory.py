@@ -1,5 +1,6 @@
 import os
 from src.azure_openai_client.azure_openai_client import AzureOpenAIClient
+from src.translation.translation import TranslationClient
 
 def create_azure_openai_client():
     """
@@ -10,4 +11,12 @@ def create_azure_openai_client():
         endpoint=os.environ.get("AZURE_OPENAI_ENDPOINT"),
         version=os.environ.get("AZURE_OPENAI_VERSION"),
         model=os.environ.get("AZURE_OPENAI_WHISPER_DEPLOYMENT")
+    )
+
+def create_translation_client():
+    """
+    Initializes an instance of TranslationClient.
+    """
+    return TranslationClient(
+        model=os.environ.get("HF_MODEL")
     )
