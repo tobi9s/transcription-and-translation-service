@@ -9,8 +9,8 @@ def main():
     root = get_root_path()
     dirs = ["chunks", "merged", "results", "transcription", "translation"]
     for d in dirs:
-        if not os.path.exists(f"{root}/test/{d}"):
-            os.makedirs(f"{root}/test/{d}")
+        if not os.path.exists(f"{root}/data/{d}"):
+            os.makedirs(f"{root}/data/{d}")
     while True:
         print("Select operation:")
         print("(1) to process a .mp4 file so all other operations be used - Please use this operation if the other operations have not been used yet.")
