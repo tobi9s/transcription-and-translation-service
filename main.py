@@ -6,6 +6,9 @@ from src.utils.get_root_path import get_root_path
 import os
 
 def main():
+    """
+    Runs the main logic of the project.
+    """
     root = get_root_path()
     dirs = ["chunks", "merged", "results", "transcription", "translation"]
     for d in dirs:
@@ -13,11 +16,11 @@ def main():
             os.makedirs(f"{root}/data/{d}")
     while True:
         print("Select operation:")
-        print("(1) to process a .mp4 into a .mp3 file so all other operations be used - Please use this operation if the other operations have not been used yet.")
-        print("(2) to transcribe a .mp3 file in its original language into a .srt file.")
-        print("(3) to translate a .mp3 file from a source language to English into a .srt file.")
-        print("(4) to translate a .mp3 file from a source language (usually English) to a target language using a HuggingFace Model into a .srt file.")
-        print("(5) to exit the programme.")
+        print("1 - process a .mp4 into a .mp3 file so all other operations be used - Please use this operation if the other operations have not been used yet.")
+        print("2 - transcribe a .mp3 file in its original language into a .srt file.")
+        print("3 - translate a .mp3 file from a source language to English into a .srt file.")
+        print("4 - translate a .mp3 file from a source language (usually English) to a target language using a HuggingFace Model into a .srt file.")
+        print("5 - exit the programme.")
         operation = input()
         match operation:
             case "1":
